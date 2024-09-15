@@ -5,3 +5,7 @@
 ## frontend
 
 TypeScriptとReact(Next.js)を用いて開発
+
+## backend
+
+Djangoを用いて開発。またMySQLを使用
