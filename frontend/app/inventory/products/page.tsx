@@ -34,6 +34,22 @@ export default function Page() {
     setShownNewRow(false);
   };
 
+  // 更新・削除処理、更新・削除行の表示制御
+  const [editingRow, setEditingRow] = useState(0);
+  const handleEditRow: any = (id: number) => {
+    setShownNewRow(false);
+    setEditingRow(id);
+  };
+  const handleEditCancel: any = (id: number) => {
+    setEditingRow(0);
+  };
+  const handleEdit: any = (id: number) => {
+    setEditingRow(0);
+  };
+  const handleDelete: any = (id: number) => {
+    setEditingRow(0);
+  };
+
   return (
     <div>
       <h2>商品一覧</h2>
