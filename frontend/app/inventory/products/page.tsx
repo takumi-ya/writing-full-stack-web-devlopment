@@ -19,6 +19,7 @@ type InputData = {
 };
 
 export default function Page() {
+  // 読込データを保持
   const [data, setData] = useState<Array<ProductData>>([]);
 
   useEffect(() => {
