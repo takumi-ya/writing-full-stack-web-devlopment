@@ -148,7 +148,7 @@ export default function Page() {
                 {/* ルーティングのために追加 */}
                 <td></td>
                 <td>
-                  <button type="button" onClick={() => handleAddCancel}>
+                  <button type="button" onClick={() => handleAddCancel()}>
                     キャンセル
                   </button>
                   <button type="submit" onClick={() => setAction("add")}>
