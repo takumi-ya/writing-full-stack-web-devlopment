@@ -5,7 +5,13 @@ import {
   AppBar,
   Box,
   Button,
+  Divider,
+  Drawer,
   IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -31,12 +37,33 @@ export default function InventoryLayout({
           </Button>
         </Toolbar>
       </AppBar>
-      <div className={styles.container}>
-        <aside className={styles.navbar}>サイドバー</aside>
-        <main className={styles.content}>
-          <section>{children}</section>
-        </main>
-      </div>
+      <Drawer anchor="left">
+        <Box sx={{ width: 240 }}>
+          <Toolbar />
+          <Divider />
+          <List>
+            <ListItem component="a" href="/inventory/products" disablePadding>
+              <ListItemButton>
+                <ListItemText primary="商品一覧" />
+              </ListItemButton>
+            </ListItem>
+            <Divider />
+            <ListItem
+              component="a"
+              href="/inventory/import_sales"
+              disablePadding
+            >
+              <ListItemButton>
+                <ListItemText primary="売上一括登録" />
+              </ListItemButton>
+            </ListItem>
+            <Divider />
+          </List>
+        </Box>
+      </Drawer>
+      <main className={styles.content}>
+        <section>{children}</section>
+      </main>
       <footer className={styles.footer}>フッター</footer>
     </Box>
   );
