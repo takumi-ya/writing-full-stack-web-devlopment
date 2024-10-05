@@ -61,9 +61,19 @@ export default function InventoryLayout({
           </List>
         </Box>
       </Drawer>
-      <main className={styles.content}>
-        <section>{children}</section>
-      </main>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          // AppBar と被るため下にずらしている
+          marginTop: "64px",
+          width: "100%",
+          background: "white",
+        }}
+      >
+        {children}
+      </Box>
       <footer className={styles.footer}>フッター</footer>
     </Box>
   );
