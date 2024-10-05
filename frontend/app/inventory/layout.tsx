@@ -15,7 +15,6 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import styles from "./products/styles.module.css";
 
 export default function InventoryLayout({
   children,
@@ -74,7 +73,20 @@ export default function InventoryLayout({
       >
         {children}
       </Box>
-      <footer className={styles.footer}>フッター</footer>
+      <Box
+        component="footer"
+        sx={{
+          width: "100%",
+          position: "fixed",
+          textAlign: "center",
+          bottom: 0,
+          background: "#1976d2",
+        }}
+      >
+        <Typography variant="caption" color="white">
+          ©︎2023 full stack web development
+        </Typography>
+      </Box>
     </Box>
   );
 }
