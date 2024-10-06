@@ -279,7 +279,7 @@ export default function Page() {
                       <Button
                         variant="outlined"
                         startIcon={<CancelIcon />}
-                        onClick={() => handleAddCancel()}
+                        onClick={() => handleEditCancel()}
                       >
                         キャンセル
                       </Button>
