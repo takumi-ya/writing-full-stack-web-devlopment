@@ -1,3 +1,5 @@
 djangorestframework
 mysqlclient
 django-cors-headers
+djangorestframework-simplejwt
+timedelta
