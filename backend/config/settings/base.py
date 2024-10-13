@@ -152,6 +152,7 @@ LOGGING = {
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'api.inventory.authentication.AccessJWTAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.IsAuthenticated'],
@@ -163,3 +164,6 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=30),
     'UPDATE_LAST_LOGIN': True,
 }
+
+# クッキーの有効期限に使用する
+COOKIE_TIME = 60 * 60 * 12
