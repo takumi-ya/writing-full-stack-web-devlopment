@@ -24,10 +24,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import productsData from "./sample/dummy_products.json";
 
 type ProductData = {
   id: number | null;
@@ -60,7 +60,13 @@ export default function Page() {
   };
 
   useEffect(() => {
-    setData(productsData);
+    axios
+      .get("/api/inventory/products")
+      .then((res) => res.data)
+      .then((data) => {
+        console.log(data);
+        setData(data);
+      });
   }, [open]);
 
   // 登録データの保持
@@ -103,7 +109,9 @@ export default function Page() {
     setId(0);
   };
   const handleAdd = (data: ProductData) => {
-    result("success", "商品が登録されました");
+    axios.post("/api/inventory/products", data).then((response) => {
+      result("success", "商品が登録されました");
+    });
     setId(0);
   };
 
@@ -127,7 +135,9 @@ export default function Page() {
     setId(0);
   };
   const handleDelete = (id: number) => {
-    result("success", "商品が削除されました");
+    axios.delete(`/api/inventory/products/${id}`).then((response) => {
+      result("success", "商品が削除されました");
+    });
     setId(0);
   };
 
