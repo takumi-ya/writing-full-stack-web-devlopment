@@ -9,7 +9,7 @@ class Product(models.Model):
     description = models.TextField(verbose_name='商品説明', null=True, blank=True)
 
     class Meta:
-        dp_table = 'product'
+        db_table = 'product'
         verbose_name = '商品'
 
 class Purchase(models.Model):
