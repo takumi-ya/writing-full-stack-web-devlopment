@@ -1,4 +1,5 @@
 from rest_framework.views import APIView
+from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from .models import Product
 from .serializers import ProductSerializer, PurchaseSerializer, SalesSerializer
@@ -10,12 +11,21 @@ class ProductView(APIView):
     商品操作に関する関数
     """
 
-    def get(self, request, format=None):
-        """
-        商品の一覧を取得する
-        """
-        queryset = Product.objects.all()
-        serializer = ProductSerializer(queryset, many=True)
+    # 商品操作に関する関数で共通で使用する商品取得関数
+    def get_object(self, pk):
+        try:
+            return Product.objects.get(pk=pk)
+        except Product.DoesNotExist:
+            raise NotFound
+
+    def get(self, request, id=None, format=None):
+        # 商品の一覧もしくは一意の商品を取得する
+        if id is None:
+            queryset = Product.objects.all()
+            serializer = ProductSerializer(queryset, many=True)
+        else:
+            product = self.get_object(id)
+            serializer = ProductSerializer(product)
         return Response(serializer.data, status.HTTP_200_OK)
     
     # 商品を登録する
@@ -26,6 +36,13 @@ class ProductView(APIView):
         # 検証したデータを永続化する
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    def put(self, request, id, format=None):
+        product = self.get_object(id)
+        serializer = ProductSerializer(instance=product, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
 class ProductModelViewSet(ModelViewSet):
     queryset = Product.objects.all()
